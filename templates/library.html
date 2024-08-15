@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .description-box {
+            display: none;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .description-box.open {
+            display: block;
+            max-height: 200px;
+            /* Adjust as needed */
+        }
+
+        .book-item {
+            position: relative;
+        }
+
+        .take-button {
+            display: none;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #4a4a4a;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .book-item:hover .take-button {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white p-4">
+    <a class="p-2 border border-1 border-blue-600 rounded" href="{{ url_for('home') }}">Back to Menu</a>
+    <h1 class="text-3xl font-bold p-8 text-center underline">Library</h1>
+    <div class="flex justify-center items-center mb-4" id="search">
+        <input type="text" placeholder="Book Name" name="book_name"
+            class="border p-2 border-gray-300 bg-gray-800 text-white w-1/2">
+    </div>
+    <div class="flex">
+        <div class="w-1/4" id="book-img">
+            <img id="current-book-image" src="static\images\book.jpg" alt="Book Cover" class="mx-auto mb-4 w-1/2">
+        </div>
+
+        <div class="w-1/2 flex-col">
+            <!-- Main Content Area -->
+            <div class="p-3 w-full max-w-3xl">
+                <ul class="list-inside text-left">
+                    <!-- First Book Item -->
+                    <li class="p-4 flex justify-between items-center rounded-lg shadow-lg mb-2 cursor-pointer book-item"
+                        style="background: linear-gradient(145deg, #323232, #4a4a4a); border: 1px solid rgba(255, 255, 255, 0.2);"
+                        data-image="static/images/great-gatsby.jpg"
+                        onclick="toggleDescription('desc1', this)">
+                        <div>
+                            <span class="font-bold block">The Great Gatsby</span>
+                            <span class="block">F. Scott Fitzgerald</span>
+                        </div>
+                        <span class="text-green-400">Available</span>
+                        <button class="take-button">Take it now</button>
+                    </li>
+                    <div id="desc1" class="description-box mb-2 p-4 bg-gray-700 rounded-lg">
+                        <p><strong>Description:</strong> A novel set in the Jazz Age on Long Island, near New York City,
+                            that tells the story of Jay Gatsby's obsession with the beautiful Daisy Buchanan.</p>
+                    </div>
+
+                    <!-- Second Book Item -->
+                    <li class="p-4 flex justify-between items-center rounded-lg shadow-lg mb-2 cursor-pointer book-item"
+                        style="background: linear-gradient(145deg, #323232, #4a4a4a); border: 1px solid rgba(255, 255, 255, 0.2);"
+                        data-image="static/images/to-kill-a-mockingbird.jpg"
+                        onclick="toggleDescription('desc2', this)">
+                        <div>
+                            <span class="font-bold block">To Kill a Mockingbird</span>
+                            <span class="block">Harper Lee</span>
+                        </div>
+                        <span class="text-green-400">Available</span>
+                        <button class="take-button">Take it now</button>
+                    </li>
+                    <div id="desc2" class="description-box mb-2 p-4 bg-gray-700 rounded-lg">
+                        <p><strong>Description:</strong> A novel about the serious issues of rape and racial inequality,
+                            told through the eyes of a young girl in the Deep South.</p>
+                    </div>
+
+                    <!-- Third Book Item -->
+                    <li class="p-4 flex justify-between items-center rounded-lg shadow-lg mb-2 cursor-pointer book-item"
+                        style="background: linear-gradient(145deg, #323232, #4a4a4a); border: 1px solid rgba(255, 255, 255, 0.2);"
+                        data-image="static/images/1984.jpg"
+                        onclick="toggleDescription('desc3', this)">
+                        <div>
+                            <span class="font-bold block">1984</span>
+                            <span class="block">George Orwell</span>
+                        </div>
+                        <span class="text-green-400">Available</span>
+                        <button class="take-button">Take it now</button>
+                    </li>
+                    <div id="desc3" class="description-box mb-2 p-4 bg-gray-700 rounded-lg">
+                        <p><strong>Description:</strong> A dystopian novel set in a totalitarian society under constant
+                            surveillance, where independent thinking is a crime.</p>
+                    </div>
+
+                    <!-- Additional Book Items as needed -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleDescription(id, element) {
+            // Find the clicked description box
+            const clickedDesc = document.getElementById(id);
+
+            // Close any currently open description boxes that aren't the clicked one
+            const openBoxes = document.querySelectorAll('.description-box.open');
+            openBoxes.forEach(box => {
+                if (box !== clickedDesc) {
+                    box.classList.remove('open');
+                }
+            });
+
+            // Toggle the clicked description box
+            clickedDesc.classList.toggle('open');
+
+            // Update the book image based on the clicked item
+            const imageUrl = element.getAttribute('data-image');
+            document.getElementById('current-book-image').src = imageUrl;
+        }
+    </script>
+</body>
+
+</html>

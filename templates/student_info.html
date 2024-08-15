@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-black text-white p-4">
+    <a class="p-2 border border-1 border-blue-600 rounded" href="{{ url_for('home') }}">Back to Menu</a>
+    <h1 class="text-3xl font-bold p-8 text-center underline">Students Information</h1>
+    <!-- Add your information form here -->
+
+    <div class="mb-4 flex flex-col items-center ">
+        <div class="flex justify-center space-x-4 p-4 rounded-lg border border-3 border-gray-300">
+            <input type="text" placeholder="Student Name" name="student_name" class="border p-2 border-gray-300 bg-gray-800 text-white">
+            <input type="text" placeholder="Student Roll Number" name="student_roll_number" class="border p-2 border-gray-300 bg-gray-800 text-white">
+            <input type="text" placeholder="Student Class" name="student_class" class="border p-2 border-gray-300 bg-gray-800 text-white">
+            <button class="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px]">
+                Search
+            </button>
+        </div>
+    </div>
+    <!--divideer here-->
+    <hr class="my-8 border-gray-300">
+
+    <div class="grid grid-cols-3 gap-16 p-4">
+        <div class="relative group">
+            <input type="text" placeholder="Student Name" name="student_name" class="border p-2 border-gray-300 bg-gray-800 text-white w-full">
+            <button style="right: -0.25rem;" class="absolute top-0 transform translate-x-full opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0 bg-blue-500 text-white p-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M17.414 2.586a2 2 0 00-2.828 0L3 14.172V17h2.828l11.586-11.586a2 2 0 000-2.828zM5 16H4v-1l9-9 1 1-9 9zM15 4l-1-1 1-1 1 1-1 1z"/>
+                </svg>
+            </button>
+        </div>
+    
+        <div class="relative group">
+            <input type="text" placeholder="Father's Name" name="father_name" class="border p-2 border-gray-300 bg-gray-800 text-white w-full">
+            <button style="right: -0.25rem;" class="absolute top-0 transform translate-x-full opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0 bg-blue-500 text-white p-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M17.414 2.586a2 2 0 00-2.828 0L3 14.172V17h2.828l11.586-11.586a2 2 0 000-2.828zM5 16H4v-1l9-9 1 1-9 9zM15 4l-1-1 1-1 1 1-1 1z"/>
+                </svg>
+            </button>
+        </div>
+    
+        <div class="relative group">
+            <input type="text" placeholder="Mother's Name" name="mother_name" class="border p-2 border-gray-300 bg-gray-800 text-white w-full">
+            <button style="right: -0.25rem;" class="absolute top-0 transform translate-x-full opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0 bg-blue-500 text-white p-2 rounded-lg border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M17.414 2.586a2 2 0 00-2.828 0L3 14.172V17h2.828l11.586-11.586a2 2 0 000-2.828zM5 16H4v-1l9-9 1 1-9 9zM15 4l-1-1 1-1 1 1-1 1z"/>
+                </svg>
+            </button>
+        </div>
+    
+        <!-- Repeat similar structure for other input fields -->
+    </div>
+    
+    
+    
+    
+
+    <!-- Add code to display exam information here -->
+    <div class="mt-8">
+        <h2 class="text-2xl font-bold">Exam Information</h2>
+        <p>Number of Exams: $NUMBER_OF_EXAMS$</p>
+        <p>Average Score: $AVERAGE_SCORE$</p>
+        <p>Remark: $REMARK$</p>
+    </div>
+
+    
+</body>
+</html>

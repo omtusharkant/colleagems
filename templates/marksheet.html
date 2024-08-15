@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marksheet</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/marksheet.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js CDN -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: "#da373d",
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-black text-white p-4">
+    <div class="flex flex-1 justify-between ">
+        <div class="flex flex-1 ">
+            <a class="p-2 border border-1 border-blue-600 rounded" href="{{ url_for('home') }}">Back to Menu</a>
+
+        </div>
+    </div>
+    <h1 class="text-3xl font-bold p-8 text-center underline">Marksheet</h1>
+        
+    
+</div>
+    </div>
+    <div class="mb-6 flex flex-col items-center">
+
+        <div class="flex justify-center space-x-4 mt-4">
+            <input type="text" placeholder="Student Name" name="student_name"
+                class="border p-2 border-gray-300 bg-gray-800 text-white">
+            <input type="text" placeholder="Student Roll Number" name="student_roll_number"
+                class="border p-2 border-gray-300 bg-gray-800 text-white">
+            <input type="text" placeholder="Student Class" name="student_class"
+                class="border p-2 border-gray-300 bg-gray-800 text-white">
+        </div>
+        <div class="mt-4">
+            <button
+                class="cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg border-blue-600 border-b-[4px]
+hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px] active:border-b-[2px] active:brightness-90 active:translate-y-[2px]">
+                Show
+            </button>
+        </div>
+    </div>
+
+    <div class="mb-6 items-center justify-between border-dashed border-2 border-sky-500 p-4 rounded-lg">
+        <div class="flex-1 flex items-center justify-center space-x-4 mb-4">
+            <h2 class="text-2xl font-semibold">Marks</h2>
+            <select id="exams" name="exams" class="border p-2 w-[80%] border-gray-300 bg-gray-800 text-white ">
+                <option value="exam 1">Exam 1</option>
+                <option value="exam 2">Exam 2</option>
+                <option value="exam 3">Exam 3</option>
+                <option value="exam 4">Exam 4</option>
+            </select>
+            <button id="toggle-mode" class="ml-4 px-4 py-2 bg-green-500 text-white rounded-lg">
+                Switch to Edit
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-4">
+            <div id="input-group">
+                <input required="" type="text" name="science" id="science" value="85" disabled class="input">
+                <label id="user-label">Science</label>
+            </div>
+            <div id="input-group">
+                <input required="" type="text" name="math" id="math" value="90" disabled class="input">
+                <label id="user-label">Math</label>
+            </div>
+            <div id="input-group">
+                <input required="" type="text" name="english" id="english" value="88" disabled class="input">
+                <label id="user-label">English</label>
+            </div>
+            <div id="input-group">
+                <input required="" type="text" name="history" id="history" value="92" disabled class="input">
+                <label id="user-label">History</label>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="ml-6">
+        <h2 class="text-2xl font-semibold mb-4">Total Marks</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full p-4">
+            <p>Score is: <span class="font-bold">95/100</span></p>
+            <p>Percentage is: <span class="font-bold">95%</span></p>
+            <p>Grade is: <span class="font-bold">A</span></p>
+            <p>Result is: <span class="font-bold">Pass</span></p>
+            <p>CGPA is: <span class="font-bold">0.0</span></p>
+            <!-- Radar Chart Section with smaller size -->
+    <div class="flex justify-center items-center p-8 ml-auto">
+        <canvas id="marksRadarChart" width="300" height="300"></canvas> <!-- Adjusted size -->
+    </div>
+        </div>
+    </div>
+
+    <script>
+        const button = document.getElementById('toggle-mode');
+        let isEditMode = false;
+        const inputs = document.querySelectorAll('.input');
+
+        button.addEventListener('click', () => {
+            isEditMode = !isEditMode;
+            button.textContent = isEditMode ? 'Switch to Show' : 'Switch to Edit';
+
+            inputs.forEach(input => {
+                input.disabled = !isEditMode;
+            });
+        });
+
+        // Radar chart implementation using Chart.js
+        const ctx = document.getElementById('marksRadarChart').getContext('2d');
+        const marksRadarChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Science', 'Math', 'English', 'History'],
+                datasets: [{
+                    label: 'Marks',
+                    data: [85, 90, 88, 92],
+                    backgroundColor: 'rgba(34, 202, 236, 0.2)',
+                    borderColor: 'rgba(34, 202, 236, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                },
+                responsive: false, // Disable responsiveness to control the size manually
+                maintainAspectRatio: false // Prevents distortion when the size is adjusted
+            }
+        });
+    </script>
+</body>
+
+</html>
